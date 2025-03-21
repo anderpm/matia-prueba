@@ -26,7 +26,7 @@ export class FormComponent implements OnInit {
   paises: string[] = [];
   provincias: string[] = [];
   registros: any[] = []; // Lista de registros para la tabla
-  displayedColumns: string[] = [
+  columnas: string[] = [
     'nombre',
     'apellido',
     'telefono',
@@ -53,7 +53,7 @@ export class FormComponent implements OnInit {
   }
 
   checkScreenSize() {
-    this.isMobile = window.innerWidth < 900; // Si es menor de 600px, usa tarjetas en vez de tabla
+    this.isMobile = window.innerWidth < 900; // Si es menor de 900px, usa tarjetas en vez de tabla
   }
 
   async cargarPaises() {
