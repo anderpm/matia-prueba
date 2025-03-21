@@ -1,0 +1,127 @@
+<div class="contenedor">
+  <form (ngSubmit)="agregarRegistro()" #formulario="ngForm">
+    <div class="form-grid">
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input
+          matInput
+          [(ngModel)]="nuevoRegistro.nombre"
+          name="nombre"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Apellido</mat-label>
+        <input
+          matInput
+          [(ngModel)]="nuevoRegistro.apellido"
+          name="apellido"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Teléfono</mat-label>
+        <input
+          matInput
+          type="tel"
+          [(ngModel)]="nuevoRegistro.telefono"
+          name="telefono"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          [(ngModel)]="nuevoRegistro.email"
+          name="email"
+          required
+          email
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>País</mat-label>
+        <mat-select
+          [(ngModel)]="nuevoRegistro.pais"
+          name="pais"
+          (selectionChange)="cargarProvincias()"
+        >
+          <mat-option *ngFor="let pais of paises" [value]="pais">{{
+            pais
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Provincia</mat-label>
+        <mat-select
+          [(ngModel)]="nuevoRegistro.provincia"
+          name="provincia"
+          [disabled]="!nuevoRegistro.pais"
+        >
+          <mat-option
+            *ngFor="let provincia of provincias"
+            [value]="provincia"
+            >{{ provincia }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">Añadir</button>
+  </form>
+</div>
+
+<div class="table-container">
+  <table mat-table [dataSource]="registros" *ngIf="!isMobile">
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="apellido">
+      <th mat-header-cell *matHeaderCellDef>Apellido</th>
+      <td mat-cell *matCellDef="let element">{{ element.apellido }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+      <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="pais">
+      <th mat-header-cell *matHeaderCellDef>País</th>
+      <td mat-cell *matCellDef="let element">{{ element.pais }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="provincia">
+      <th mat-header-cell *matHeaderCellDef>Provincia</th>
+      <td mat-cell *matCellDef="let element">{{ element.provincia }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<div class="card-container" *ngIf="isMobile">
+  <div class="card" *ngFor="let element of registros">
+    <p><strong>Nombre:</strong> {{ element.nombre }}</p>
+    <p><strong>Apellido:</strong> {{ element.apellido }}</p>
+    <p *ngIf="element.telefono">
+      <strong>Teléfono:</strong> {{ element.telefono }}
+    </p>
+    <p><strong>Email:</strong> {{ element.email }}</p>
+    <p *ngIf="element.pais"><strong>País:</strong> {{ element.pais }}</p>
+    <p *ngIf="element.provincia"><strong>Provincia:</strong> {{ element.provincia }}</p>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+// Variables de colores
+$background-color: #f8f9fa;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$border-radius: 10px;
+
+// Sombra
+@mixin box-shadow {
+  box-shadow: $box-shadow;
+}
+
+// Estilos generales
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+// Contenedor principal
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+// Estilos del formulario
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  background: $background-color;
+  padding: 20px;
+  border-radius: $border-radius;
+  @include box-shadow;
+}
+
+// Grid de formularios
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 columnas en escritorio
+  column-gap: 20px;
+  width: 100%;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+}
+
+// Estilos de la tabla
+table {
+  width: 100%;
+  margin-top: 20px;
+  background: white;
+  border-radius: $border-radius;
+  @include box-shadow;
+}
+
+// Estilos para vista móvil (ocultar columnas innecesarias)
+/*
+@media (max-width: 600px) {
+  td:nth-child(3), th:nth-child(3),
+  td:nth-child(4), th:nth-child(4),
+  td:nth-child(5), th:nth-child(5),
+  td:nth-child(6), th:nth-child(6) {
+    display: none;
+  }
+}
+*/
+
+// Estilos para vista móvil (tarjetas)
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.card {
+  margin-top: 20px;
+  flex-direction: column; // Asegura que los elementos estén en columna
+  text-align: center;
+  background: white;
+  padding: 15px;
+  border-radius: $border-radius;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
